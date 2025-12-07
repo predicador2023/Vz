@@ -28,6 +28,12 @@ async function cargarHistoria() {
     document.querySelector(".contenido").innerHTML =
       h.contenido || "<p>Relato sin contenido</p>";
 
+    // Evento Compartir
+    const shareBtn = document.querySelector(".share-btn");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", () => compartirHistoria(h));
+    }
+
   } catch (error) {
     console.error(error);
     document.querySelector(".contenido").innerHTML =
@@ -37,3 +43,16 @@ async function cargarHistoria() {
 
 // Ejecutar al cargar la página
 cargarHistoria();
+
+// 👉 Función global para compartir
+function compartirHistoria(h) {
+  if (navigator.share) {
+    navigator.share({
+      title: h.titulo,
+      text: "Mirá esta historia en La Voz del Atril:",
+      url: window.location.href
+    }).catch(err => console.error("Error al compartir:", err));
+  } else {
+    alert("Copiá este link para compartir: " + window.location.href);
+  }
+}

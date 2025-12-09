@@ -132,14 +132,87 @@
   gap: 1rem;
   padding: 1rem;
 }
+/* Estilos base (desktop grande) */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  font-size: 18px;
+  max-width: 1200px;
+}
 
-/* Responsive para pantallas chicas */
-@media (max-width: 600px) {
-  .contenedorNuevo {
+header {
+  font-size: 28px;
+  text-align: left;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+/* 📱 Pantallas medianas (tablets, <= 1024px) */
+@media (max-width: 1024px) {
+  body {
+    margin: 15px;
+    font-size: 17px;
     max-width: 100%;
   }
 
-  .imgtarjeta {
-    height: 160px;
+  header {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 📱 Pantallas pequeñas (celulares, <= 768px) */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
+    font-size: 16px;
+  }
+
+  header {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* 📱 Pantallas muy chicas (<= 480px) */
+@media (max-width: 480px) {
+  body {
+    margin: 5px;
+    font-size: 15px;
+  }
+
+  header {
+    font-size: 18px;
+  }
+
+  .card {
+    margin-bottom: 10px;
+  }
+
+  .card img {
+    border-radius: 5px;
   }
 }

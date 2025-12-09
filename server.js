@@ -1,70 +1,76 @@
-const express = require("express");
-const path = require("path");
-const sqlite3 = require("sqlite3").verbose();
+// server.js
+const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const cors = require('cors');   // 👉 nuevo
 
 const app = express();
+const PORT = process.env.PORT || 4001;
 
-// Middleware para servir archivos estáticos (frontend en carpeta public)
-app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());                // 👉 habilita CORS
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
-// Conexión a la base de datos SQLite
-const db = new sqlite3.Database(path.join(__dirname, "Vz.db"));
-
-// Ruta: obtener todas las historias
-app.get("/api/historias", (req, res) => {
-  db.all("SELECT * FROM historias", [], (err, rows) => {
+// Ruta para obtener todas las historias
+app.get('/historias', (req, res) => {
+  const dbPath = path.join(__dirname, 'Vz.db');
+  const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READONLY, (err) => {
     if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Error al obtener historias" });
+      console.error('Error al abrir la base:', err.message);
+      return res.status(500).json({ error: 'No se pudo abrir la base de datos' });
     }
-    res.json(rows);
   });
-});
 
-// Ruta: obtener una historia por ID
-app.get("/api/historias/:id", (req, res) => {
-  const id = req.params.id;
-  db.get("SELECT * FROM historias WHERE id = ?", [id], (err, row) => {
+  db.all('SELECT * FROM historias', (err, rows) => {
     if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Error al obtener la historia" });
+      console.error('Error al consultar historias:', err.message);
+      res.status(500).json({ error: 'Error al obtener las historias' });
+    } else {
+      res.json(rows);
     }
-    if (!row) {
-      return res.status(404).json({ error: "Historia no encontrada" });
-    }
-    res.json(row);
+    db.close();
   });
 });
 
-// Ruta: dar "like" a una historia
-app.post("/api/historias/:id/like", (req, res) => {
+// Ruta para obtener una historia por ID
+app.get('/historias/:id', (req, res) => {
+  const dbPath = path.join(__dirname, 'Vz.db');
+  const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READONLY);
+
   const id = req.params.id;
-  db.run(
-    "UPDATE historias SET likes = COALESCE(likes, 0) + 1 WHERE id = ?",
-    [id],
-    function (err) {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Error al actualizar likes" });
-      }
-      db.get("SELECT likes FROM historias WHERE id = ?", [id], (err, row) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({ error: "Error al obtener likes" });
-        }
-        res.json({ likes: row.likes });
-      });
+  db.get('SELECT * FROM historias WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      console.error('Error al obtener historia:', err.message);
+      res.status(500).json({ error: 'Error al obtener la historia' });
+    } else if (!row) {
+      res.status(404).json({ error: 'Historia no encontrada' });
+    } else {
+      res.json(row);
     }
-  );
+    db.close();
+  });
 });
 
-// 👉 Exportar para Vercel
-module.exports = app;
+// Ruta para dar "like" a una historia
+app.post('/historias/:id/like', (req, res) => {
+  const dbPath = path.join(__dirname, 'Vz.db');
+  const db = new sqlite3.Database(dbPath);
 
-// 👉 Si se ejecuta localmente, levantar servidor en puerto 4001
-if (require.main === module) {
-  const PORT = process.env.PORT || 4001;
-  app.listen(PORT, () => {
-    console.log(`Servidor local corriendo en http://localhost:${PORT}`);
+  const id = req.params.id;
+  db.run('UPDATE historias SET likes = likes + 1 WHERE id = ?', [id], function (err) {
+    if (err) {
+      console.error('Error al dar like:', err.message);
+      res.status(500).json({ error: 'Error al actualizar likes' });
+    } else if (this.changes === 0) {
+      res.status(404).json({ error: 'Historia no encontrada' });
+    } else {
+      res.json({ success: true });
+    }
+    db.close();
   });
-}
+});
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});

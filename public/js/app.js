@@ -19,28 +19,19 @@ async function cargarHistorias() {
       card.classList.add("card");
       card.dataset.id = h.id;
 
-      card.innerHTML = `
-        <img src="${h.imagen || ""}" alt="${h.titulo || ""}" class="imgtarjeta">
-        <h3>${h.titulo || "Sin título"}</h3>
-        <div class="meta">${h.fecha || "Fecha n/d"} – ${h.autor || "Autor n/d"}</div>
-        <div class="acciones">
-          <button class="like-btn">❤️</button>
-          <span class="like-count">${Number(h.likes || 0)}</span>
-          <button class="leer-btn">📘 Leer más</button>
-          <button class="share-btn">
-            <svg class="icono-compartir" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                 viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="18" cy="5" r="3"></circle>
-              <circle cx="6" cy="12" r="3"></circle>
-              <circle cx="18" cy="19" r="3"></circle>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-            </svg>
-            Compartir
-          </button>
-        </div>
-      `;
+    card.innerHTML = `
+  <img src="${h.imagen || ''}" alt="${h.titulo || ''}">
+  <div class="contenido">
+    <h3>${h.titulo || 'Sin título'}</h3>
+    <div class="meta">${h.fecha || 'Fecha n/d'} – ${h.autor || 'Autor n/d'}</div>
+    <div class="acciones">
+      <button class="like-btn">❤️</button>
+      <span class="like-count">${Number(h.likes || 0)}</span>
+      <button class="leer-btn">📘 Leer más</button>
+      <button class="share-btn">Compartir</button>
+    </div>
+  </div>
+`;
 
       // Botón Me gusta
       const heart = card.querySelector(".like-btn");

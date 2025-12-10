@@ -214,6 +214,31 @@ img {
   stroke: #fff;
 }
 
+.header-mobile {
+  padding: 15px 20px;
+  background: #1a1a1a; /* sobrio, oscuro */
+  color: #fff;
+  border-bottom: 2px solid #333;
+}
+
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* espacio entre logo y título */
+}
+
+.logo-titulo img {
+  max-width: 50px;
+  height: auto;
+}
+
+.logo-titulo h1 {
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
 /* Responsive tablets */
 @media (max-width: 1024px) {
   .contenedorHistorias {
@@ -231,6 +256,34 @@ img {
     padding: 15px;
   }
 
+ .header-mobile {
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #1e90ff, #001f4d); /* degradado azul → azul oscuro */
+  color: #fff;
+  border-bottom: 2px solid #333;
+
+  display: flex;
+  justify-content: flex-start; /* logo y título alineados a la izquierda */
+  align-items: center;
+}
+
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-titulo img {
+  width: 48px;
+  height: auto;
+}
+
+.logo-titulo h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 600;
+  color: #fff;
+}
   .titulo {
     font-size: 1.5rem;
   }

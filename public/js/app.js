@@ -16,7 +16,7 @@ async function cargarHistorias() {
 
     historias.forEach(h => {
       const card = document.createElement("div");
-      card.classList.add("contenedorNuevo");
+      card.classList.add("card");
       card.dataset.id = h.id;
 
       card.innerHTML = `

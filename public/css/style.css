@@ -1,111 +1,64 @@
-    body { font-family: system-ui, Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px; }
-    h1 { margin:0 0 20px; }
-    #estado { margin-bottom: 10px; color:#555; }
-    #historias { display:flex; flex-wrap:wrap; gap:20px; }
-    .card { background:#fff; border:1px solid #ddd; border-radius:8px; width:280px; padding:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1); display:flex; flex-direction:column; }
-    .card img { width:100%; height:160px; object-fit:cover; border-radius:6px; }
-    .meta { font-size:12px; color:#666; margin:6px 0 10px; }
-    .acciones { display:flex; align-items:center; gap:10px; margin-top:auto; }
-    .like-btn { background:none; border:1px solid #ddd; border-radius:6px; font-size:18px; padding:4px 8px; cursor:pointer; color:#555; }
-    .like-btn.liked { color:#e60023; border-color:#e60023; }
-    .leer-btn { margin-left:auto; padding:6px 10px; border:none; background:#007bff; color:#fff; border-radius:6px; cursor:pointer; }
-    .modal { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; }
-    .modal-content { background:#fff; padding:20px; border-radius:8px; max-width:700px; max-height:85vh; overflow:auto; }
-    .cerrar { float:right; font-size:24px; cursor:pointer; }
-    .preview { font-size:14px; color:#333; margin:8px 0 12px; }
-    .vacio { color:#777; font-style:italic; }
-
-    body {
+/* Estilo base */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  font-family: 'Georgia', serif;
-  background-color: #f0f0f0;
+  padding: 20px;
+  background: #f5f5f5;
   color: #222;
 }
 
-.cabecera {
-  background: #182229;
-  color: #fff;
-  padding: 1.5rem;
-  text-align: center;
-  position: relative;
-}
-
-.cabecera .volver {
-  position: absolute;
-  left: 1.5rem;
-  top: 1.5rem;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
+/* Contenedor de tarjetas */
 .contenedorHistorias {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.contenedorNuevo {
+/* Tarjeta individual */
+.card {
   background: #fff;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  width: 250px;
-  padding: 1rem;
-}
-  /* Tarjeta individual */
-.contenedorNuevo {
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 1rem;
-  margin: 1rem;
-  width: 100%;
-  max-width: 320px;
-  box-sizing: border-box;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s ease;
-}
-
-.contenedorNuevo:hover {
-  transform: scale(1.02);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Imagen dentro de la tarjeta */
-.imgtarjeta {
+.card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  border-radius: 6px;
+  display: block;
 }
-
-/* Título y metadatos */
-.contenedorNuevo h3 {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-  text-align: center;
-}
-
+/* Meta y botones */
 .meta {
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #666;
-  margin-bottom: 1rem;
+  margin: 10px 0;
   text-align: center;
 }
 
-/* Botones de acción */
 .acciones {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 10px;
   margin-top: auto;
+  flex-wrap: wrap;
 }
 
 .like-btn,
-.leer-btn {
+.leer-btn,
+.compartir-btn {
   background-color: #e0e0e0;
   border: none;
   padding: 0.5rem 0.8rem;
@@ -115,104 +68,223 @@
   transition: background-color 0.2s ease;
 }
 
+.leer-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.like-btn.liked {
+  color: #e60023;
+  border: 1px solid #e60023;
+}
+
 .like-btn:hover,
-.leer-btn:hover {
+.leer-btn:hover,
+.compartir-btn:hover {
   background-color: #d0d0d0;
 }
 
-.like-btn.clicked {
-  background-color: #ffcccc;
-}
-
-/* Responsive: contenedor de tarjetas */
-.contenedorHistorias {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
-}
-/* Estilos base (desktop grande) */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  font-size: 18px;
-  max-width: 1200px;
-}
-
-header {
-  font-size: 28px;
-  text-align: left;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card img {
-  width: 100%;
+img {
+  max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
-/* 📱 Pantallas medianas (tablets, <= 1024px) */
-@media (max-width: 1024px) {
-  body {
-    margin: 15px;
-    font-size: 17px;
-    max-width: 100%;
-  }
-
-  header {
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Página de detalle */
+.pagina-relato {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* 📱 Pantallas pequeñas (celulares, <= 768px) */
+.relato {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #333;
+}
+
+.fecha {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.contenido {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.imagen-relato {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+  margin-bottom: 1rem;
+}
+/* Header general */
+.cabecera {
+  background-color: #007bff; /* azul editorial */
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centra el contenido */
+  position: relative;
+  border-bottom: 4px solid #0056b3;
+}
+
+/* Título centrado */
+.cabecera h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  text-align: center;
+  flex: 1; /* ocupa todo el espacio para quedar centrado */
+}
+
+/* Botón volver */
+.cabecera .volver {
+  position: absolute;
+  left: 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.cabecera .volver:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  body {
-    margin: 10px;
-    font-size: 16px;
-  }
-
-  header {
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  nav {
-    display: flex;
+  .cabecera {
     flex-direction: column;
-    align-items: center;
+    padding: 10px;
+  }
+
+  .cabecera h1 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+
+  .cabecera .volver {
+    position: static;
+    margin-bottom: 5px;
   }
 }
 
-/* 📱 Pantallas muy chicas (<= 480px) */
-@media (max-width: 480px) {
-  body {
-    margin: 5px;
-    font-size: 15px;
+/* Botón compartir */
+.acciones-detalle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.share-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-btn:hover {
+  background-color: #0056b3;
+}
+
+.icono-compartir {
+  stroke: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pagina-relato {
+    padding: 10px;
   }
 
-  header {
-    font-size: 18px;
+  .relato {
+    padding: 15px;
   }
 
-  .card {
-    margin-bottom: 10px;
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  .contenido {
+    font-size: 0.95rem;
+  }
+
+  .imagen-relato {
+    max-height: 220px;
+  }
+
+  .share-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
+/* Responsive tablets */
+@media (max-width: 1024px) {
+  .contenedorHistorias {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* Responsive celulares */
+@media (max-width: 768px) {
+  .contenedorHistorias {
+    grid-template-columns: 1fr;
+    padding: 10px;
   }
 
   .card img {
-    border-radius: 5px;
+    height: 160px;
   }
+
+  .acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Pantallas muy chicas */
+@media (max-width: 480px) {
+  .card {
+    padding: 10px;
+  }
+
+  .card img {
+    height: 140px;
+    border-radius: 4px;
+  }
+
+  .meta {
+    font-size: 13px;
+  }
+
+  .like-btn,
+  .leer-btn,
+  .compartir-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+
 }

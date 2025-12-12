@@ -308,8 +308,8 @@ img {
 
 .card {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: row;   /* imagen a la izquierda, contenido a la derecha */
+  align-items: stretch;  /* hijos ocupan toda la altura */
   gap: 12px;
   margin-bottom: 16px;
   padding: 10px;
@@ -317,56 +317,44 @@ img {
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  min-height: 120px;
+  min-height: 160px;
 }
 
 .card img {
   width: 40%;
-  height: auto;
-  max-height: 160px;
+  height: 100%;          /* imagen ocupa toda la altura de la tarjeta */
   object-fit: cover;
   border-radius: 6px;
   flex-shrink: 0;
 }
 
-.card .contenido {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 6px;
-  height: 100%;
-}
-
-.card h3 {
-  font-size: 1.1rem;
-  margin: 0;
-  color: #222;
-}
-
-.card .meta {
-  font-size: 0.85rem;
-  color: #666;
-}
-
 .card .acciones-superior {
   display: flex;
-  justify-content: flex-start;
-  gap: 10px;
+  justify-content: flex-start; /* me gusta primero, compartir a la derecha */
+  gap: 12px;
+  margin-top: 6px;
 }
 
 .card .acciones-inferior {
   margin-top: auto;
+  text-align: right;     /* botón leer más abajo a la derecha */
 }
 
-.card .acciones-inferior button {
-  font-size: 0.85rem;
-  padding: 0.4rem 0.6rem;
+.card .leer-btn {
+  background: #0077cc;
+  color: #fff;
   border: none;
-  background: #eee;
+  padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
-  width: fit-content;
+  font-size: 0.9rem;
+  width: auto;           /* compacto, no ocupa todo el ancho */
+  display: inline-block;
+  transition: background 0.2s ease;
+}
+
+.card .leer-btn:hover {
+  background: #005fa3;
 }
   .meta {
     font-size: 13px;

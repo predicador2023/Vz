@@ -27,8 +27,9 @@ async function cargarHistorias() {
     <div class="acciones">
       <button class="like-btn">❤️</button>
       <span class="like-count">${Number(h.likes || 0)}</span>
-      <button class="leer-btn">📘 Leer más</button>
       <button class="share-btn">Compartir</button>
+      <button class="leer-btn">📘 Leer más</button>
+      
     </div>
   </div>
 `;

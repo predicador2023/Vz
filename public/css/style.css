@@ -40,6 +40,7 @@ body {
   border-radius: 6px;
   display: block;
 }
+
 /* Meta y botones */
 .meta {
   font-size: 14px;
@@ -135,28 +136,44 @@ img {
   display: block;
   margin-bottom: 1rem;
 }
-/* Header general */
-.cabecera {
+
+/* Header general (PC) */
+.header-mobile {
   background-color: #007bff; /* azul editorial */
   color: #fff;
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  justify-content: center; /* centra el contenido */
-  position: relative;
+  justify-content: flex-start; /* logo y título a la izquierda */
   border-bottom: 4px solid #0056b3;
+  position: relative;
 }
 
-/* Título centrado */
-.cabecera h1 {
+/* Contenedor logo + título */
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* espacio entre logo y título */
+}
+
+/* Logo */
+.logo-titulo img {
+  max-width: 80px;   /* tamaño máximo para PC */
+  height: auto;      /* mantiene proporción */
+  display: block;    /* evita que se comporte como inline */
+}
+
+/* Título */
+.logo-titulo h1 {
   margin: 0;
   font-size: 1.8rem;
-  text-align: center;
-  flex: 1; /* ocupa todo el espacio para quedar centrado */
+  font-weight: bold;
+  color: #fff;
+  text-align: left; /* explícitamente a la izquierda */
 }
 
-/* Botón volver */
-.cabecera .volver {
+/* Botón volver (si lo usás en PC) */
+.header-mobile .volver {
   position: absolute;
   left: 20px;
   color: #fff;
@@ -165,12 +182,19 @@ img {
   font-weight: bold;
 }
 
-.cabecera .volver:hover {
+.header-mobile .volver:hover {
   text-decoration: underline;
 }
+/* Responsive tablets */
+@media (max-width: 1024px) {
+  .contenedorHistorias {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
 
-/* Responsive */
+/* Responsive celulares */
 @media (max-width: 768px) {
+  /* Cabecera */
   .cabecera {
     flex-direction: column;
     padding: 10px;
@@ -185,69 +209,8 @@ img {
     position: static;
     margin-bottom: 5px;
   }
-}
 
-/* Botón compartir */
-.acciones-detalle {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.share-btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.share-btn:hover {
-  background-color: #0056b3;
-}
-
-.icono-compartir {
-  stroke: #fff;
-}
-
-.header-mobile {
-  padding: 15px 20px;
-  background: #1a1a1a; /* sobrio, oscuro */
-  color: #fff;
-  border-bottom: 2px solid #333;
-}
-
-.logo-titulo {
-  display: flex;
-  align-items: center;
-  gap: 12px; /* espacio entre logo y título */
-}
-
-.logo-titulo img {
-  max-width: 50px;
-  height: auto;
-}
-
-.logo-titulo h1 {
-  font-size: 1.6rem;
-  margin: 0;
-  font-weight: bold;
-  color: #fff;
-}
-
-/* Responsive tablets */
-@media (max-width: 1024px) {
-  .contenedorHistorias {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-}
-
-/* Responsive celulares */
-@media (max-width: 768px) {
+  /* Página relato */
   .pagina-relato {
     padding: 10px;
   }
@@ -256,34 +219,36 @@ img {
     padding: 15px;
   }
 
- .header-mobile {
-  padding: 15px 20px;
-  background: linear-gradient(135deg, #1e90ff, #001f4d); /* degradado azul → azul oscuro */
-  color: #fff;
-  border-bottom: 2px solid #333;
+  /* Header móvil */
+  .header-mobile {
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #1e90ff, #001f4d);
+    color: #fff;
+    border-bottom: 2px solid #333;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-  display: flex;
-  justify-content: flex-start; /* logo y título alineados a la izquierda */
-  align-items: center;
-}
+  .logo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-.logo-titulo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+  .logo-titulo img {
+    width: 48px;
+    height: auto;
+  }
 
-.logo-titulo img {
-  width: 48px;
-  height: auto;
-}
+  .logo-titulo h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 600;
+    color: #fff;
+  }
 
-.logo-titulo h1 {
-  font-size: 1.8rem;
-  margin: 0;
-  font-weight: 600;
-  color: #fff;
-}
+  /* Texto */
   .titulo {
     font-size: 1.5rem;
   }
@@ -296,68 +261,83 @@ img {
     max-height: 220px;
   }
 
-  .share-btn {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.8rem;
-  }
-
+  /* Historias en una columna */
   .contenedorHistorias {
     grid-template-columns: 1fr;
     padding: 10px;
   }
 
-.card {
-  display: flex;
-  flex-direction: row;   /* imagen a la izquierda, contenido a la derecha */
-  align-items: stretch;  /* hijos ocupan toda la altura */
-  gap: 12px;
-  margin-bottom: 16px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  min-height: 160px;
-}
+  /* Tarjetas */
+  .card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-height: 160px;
+  }
 
-.card img {
-  width: 40%;
-  height: 100%;          /* imagen ocupa toda la altura de la tarjeta */
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
-}
+  .card img {
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
 
-.card .acciones-superior {
-  display: flex;
-  justify-content: flex-start; /* me gusta primero, compartir a la derecha */
-  gap: 12px;
-  margin-top: 6px;
-}
+  .card .contenido {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    height: 100%;
+  }
 
-.card .acciones-inferior {
-  margin-top: auto;
-  text-align: right;     /* botón leer más abajo a la derecha */
-}
+  .card h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #222;
+  }
 
-.card .leer-btn {
-  background: #0077cc;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  width: auto;           /* compacto, no ocupa todo el ancho */
-  display: inline-block;
-  transition: background 0.2s ease;
-}
-
-.card .leer-btn:hover {
-  background: #005fa3;
-}
-  .meta {
+  .card .meta {
     font-size: 13px;
+    color: #666;
+  }
+
+  /* Acciones */
+  .card .acciones-superior {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .card .acciones-inferior {
+    margin-top: auto;
+    text-align: right;
+  }
+
+  .card .leer-btn {
+    background: #0077cc;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: auto;
+    display: inline-block;
+    transition: background 0.2s ease;
+  }
+
+  .card .leer-btn:hover {
+    background: #005fa3;
   }
 
   .like-btn,

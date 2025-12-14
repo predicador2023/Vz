@@ -63,12 +63,12 @@ body {
   font-size: 0.9rem; 
 }
 .share-btn {
-  background-color: #6fff44;
+  background-color: #a0ff83;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem; 
+  font-size: 0.9rem; 
   transition: background-color 0.2s ease;
 }
 
@@ -84,7 +84,7 @@ body {
 
 .like-btn:hover,
 .leer-btn:hover,
-.compartir-btn:hover {
+.share-btn:hover {
   background-color: #d0d0d0;
 }
 
@@ -268,7 +268,7 @@ img {
   .contenedorHistorias {
     grid-template-columns: 1fr;
     padding: 5px;
-    gap: 8px;
+    gap: 6px; /* más compacto */
   }
 
   /* Tarjetas */
@@ -276,8 +276,8 @@ img {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 6px; /* más compacto */
+    margin-bottom: 6px; /* menos distancia entre tarjetas */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -318,8 +318,10 @@ img {
   .card .acciones-superior {
     display: flex;
     justify-content: flex-start;
-    gap: 12px;
-    margin-top: 6px;
+    gap: 10px;
+    /* margin-top: 6px; */
+    flex-wrap: wrap;
+
   }
 
   .card .acciones-inferior {
@@ -344,10 +346,33 @@ img {
     background: #005fa3;
   }
 
-  .like-btn,
-  .leer-btn,
-  .share-btn {
-    font-size: 1rem;
-    padding: 0.4rem 0.6rem;
-  }
+ .like-btn,
+.leer-btn {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.8rem;       /* más chico que en PC */
+  padding: 4px 6px;        /* menos alto y ancho */
+  border-radius: 6px;
+  background-color: #a0ff83;
+  border: none;
+  cursor: pointer;
+  max-width: max-content;  /* evita que se estire */
+  white-space: nowrap;     /* evita que se corte el texto */
+  margin: 0;               /* elimina desplazamiento lateral */
+}
+
+.share-btn::before {
+  content: url('img/icono-compartir.svg');
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
 }

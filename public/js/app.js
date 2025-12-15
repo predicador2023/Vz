@@ -25,13 +25,20 @@ async function cargarHistorias() {
     <h3>${h.titulo || 'Sin título'}</h3>
     <div class="meta">${h.fecha || 'Fecha n/d'} – ${h.autor || 'Autor n/d'}</div>
     <div class="acciones">
-      <button class="like-btn">❤️</button>
-      <span class="like-count">${Number(h.likes || 0)}</span>
-      <button class="share-btn" aria-label="Compartir">
-        <img src="img/share.svg" alt="Compartir">
-      </button>
-      <button class="leer-btn">📘 Leer más</button>
       
+       <div class="acciones-superior">
+        <button class="like-btn">❤️ <span class="like-count">${h.likes || 0}</span></button>
+        
+        <button class="share-btn">
+          <img src="img/share.svg" alt="Compartir">
+        </button>
+
+       </div>
+
+      <div class="acciones-inferior">
+        <button class="leer-btn">Leer más</button>
+      </div>
+
     </div>
   </div>
 `;

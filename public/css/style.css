@@ -51,10 +51,11 @@ body {
 
 .acciones {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: flex-start; /* ya no centra todo */
+  align-items: center;         /* alinea verticalmente */
+  gap: 8px;                    /* menos espacio entre botones */
   margin-top: auto;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;           /* evita que se rompa la línea */
 }
 
 .like-btn,
@@ -68,8 +69,19 @@ body {
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem; 
+  font-size: 0.9rem;
   transition: background-color 0.2s ease;
+  display: inline-flex;        /* ícono + texto alineados */
+  align-items: center;
+  gap: 6px;
+}
+.share-btn::before {
+  content: url('img/icono-compartir.svg');
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 6px;
 }
 
 .leer-btn {
@@ -298,7 +310,7 @@ img {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     gap: 6px;
     height: 100%;
   }
@@ -351,14 +363,46 @@ img {
   font-size: 0.9rem;
   padding: 0.4rem 0.6rem;
 }
+.leer-btn {
+    background: #42b0ff;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+  }
+
+  .leer-btn:hover {
+    background: #005fa3;
+  }
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .acciones-superior {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .acciones-inferior {
+    text-align: center;
+  }
+
 
 .share-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   font-size: 0.8rem;       /* más chico que en PC */
-  padding: 4px 6px;        /* menos alto y ancho */
+  padding: 2px;        /* menos alto y ancho */
   border-radius: 6px;
   background-color: #a0ff83;
   border: none;
@@ -369,10 +413,32 @@ img {
 }
 
 .share-btn::before {
-  content: url('img/icono-compartir.svg');
-  display: inline-block;
+  content: url('img/share.svg');
+  display: block;
   width: 16px;
   height: 16px;
   vertical-align: middle;
 }
+.share-btn img {
+  width: 26px;   /* tamaño del ícono dentro */
+  height: 26px;
+  display: block;
+  margin-right: 20px;
 }
+
+}
+/* Desde 501px → todos en una fila */
+@media (min-width: 501px) {
+  .acciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .acciones-superior,
+  .acciones-inferior {
+    margin: 0;
+  }
+}
+
